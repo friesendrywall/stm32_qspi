@@ -1,0 +1,169 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="qspi_issue" target="8" version="2">
+  <project Name="qspi_issue">
+    <configuration
+      CMSIS_CORE="Yes"
+      Name="Common"
+      Placement="Flash"
+      Target="STM32F769NI"
+      arm_architecture="v7EM"
+      arm_core_type="Cortex-M7"
+      arm_fp_abi="Hard"
+      arm_fpu_type="FPv5-D16"
+      arm_linker_heap_size="32767"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="8192"
+      arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory$(HostDLL)"
+      arm_simulator_memory_simulation_parameter="STM32F769NI;0x200000;0x80000"
+      arm_target_loader_applicable_loaders="Flash"
+      arm_target_loader_default_loader="Flash"
+      arm_target_trace_interface_type="None"
+      c_system_include_directories="$(StudioIncDir:$(StudioDir)/include);$(PackagesDir)/include;$(ProjectDir)/inc;$(ProjectDir)/src/FreeRTOS/include"
+      c_user_include_directories="$(TargetsDir)/STM32/include"
+      compile_pre_build_command=""
+      compile_pre_build_command_output_file_name=""
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F7x9_Peripherals.xml"
+      debug_restrict_memory_access="No"
+      debug_threads_script="$(ProjectDir)/threads.js"
+      linker_additional_options="--undefined=uxTopUsedPriority"
+      linker_memory_map_file="$(ProjectDir)/STM32F769NI_MemoryMap.xml"
+      linker_printf_fp_enabled="No"
+      linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
+      macros="DeviceVectorsFile=STM32F769xx.vec"
+      pre_build_command=""
+      pre_build_command_control="Always Run"
+      pre_build_command_wd="$(ProjectDir)"
+      project_directory=""
+      project_type="Executable"
+      property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"
+      target_get_partname_script="GetPartName()"
+      target_loader_no_load_sections=".qspi__"
+      target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <configuration
+      Name="Flash"
+      arm_target_flash_loader_file_path="$(LOADER:$(TargetsDir)/STM32/Release/STM32F2xx_Loader_rpc.elf)"
+      arm_target_loader_can_erase_all="Yes"
+      arm_target_loader_can_lock_all="No"
+      arm_target_loader_can_lock_range="No"
+      arm_target_loader_can_unlock_all="No"
+      arm_target_loader_can_unlock_range="No"
+      target_reset_script="FLASHReset()" />
+    <configuration Name="RAM" target_reset_script="Reset()" />
+    <folder Name="Source Files">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="main.c">
+        <configuration
+          Name="Common"
+          c_system_include_directories="$(StudioIncDir:$(StudioDir)/include);$(PackagesDir)/include;$(ProjectDir)/inc;$(ProjectDir)/src/FreeRTOS/include" />
+      </file>
+      <folder Name="HAL_STM32F7">
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_qspi.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_tim_ex.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_exti.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_fmc.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_gpio.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_i2c.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_rcc.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_tim.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_usart.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_utils.c" />
+        <file file_name="STM32F7xx_HAL_Driver/Src/stm32f7xx_ll_spi.c" />
+      </folder>
+      <folder Name="FreeRTOS">
+        <file file_name="FreeRTOS_Source/croutine.c" />
+        <file file_name="FreeRTOS_Source/event_groups.c" />
+        <file file_name="FreeRTOS_Source/list.c" />
+        <file file_name="FreeRTOS_Source/queue.c" />
+        <file file_name="FreeRTOS_Source/stream_buffer.c" />
+        <file file_name="FreeRTOS_Source/tasks.c" />
+        <file file_name="FreeRTOS_Source/timers.c" />
+        <folder Name="portable">
+          <folder Name="MemMang">
+            <file file_name="FreeRTOS_Source/portable/MemMang/heap_6.c" />
+          </folder>
+          <file file_name="FreeRTOS_Source/portable/GCC/ARM_CM7/r0p1/port.c" />
+          <file file_name="FreeRTOS_Source/portable/GCC/ARM_CM7/r0p1/portmacro.h" />
+        </folder>
+      </folder>
+      <file file_name="inc/FreeRTOSConfig.h" />
+      <file file_name="inc/FreeRTOSIPConfig.h" />
+      <folder Name="src">
+        <folder Name="qspi">
+          <file file_name="src/qspi/drivQSPI.c" />
+        </folder>
+        <file file_name="src/init.c" />
+        <file file_name="src/stm32f7xx_hal_msp.c" />
+        <file file_name="src/stm32f7xx_hal_timebase_tim.c" />
+        <file file_name="src/stm32f7xx_it.c" />
+        <file file_name="src/system_stm32f7xx.c" />
+        <folder Name="http">
+          <file file_name="src/http/httpROMFS.c" />
+          <file file_name="src/http/httpROMFSdata.c" />
+          <file file_name="src/http/yaRomfsCore.c" />
+        </folder>
+      </folder>
+      <folder Name="inc">
+        <folder Name="qspi">
+          <file file_name="inc/qspi/drivQSPI.h" />
+          <file file_name="inc/qspi/MT25Q.h" />
+        </folder>
+        <file file_name="inc/yaROMFSconfig.h" />
+        <folder Name="http">
+          <file file_name="inc/http/httpROMFS.h" />
+          <file file_name="inc/http/httpserver.h" />
+        </folder>
+        <file file_name="inc/global.h" />
+        <file file_name="inc/flashaddress.h" />
+      </folder>
+    </folder>
+    <folder Name="System Files">
+      <file file_name="$(StudioDir)/source/thumb_crt0.s" />
+      <file file_name="$(TargetsDir)/STM32/STM32_Startup.s" />
+      <file file_name="$(TargetsDir)/STM32/$(DeviceVectorsFile)" />
+    </folder>
+    <file file_name="STM32F769NI_MemoryMap.xml" />
+    <configuration Name="Debug" linker_printf_fp_enabled="No" />
+    <configuration Name="Release" linker_printf_fmt_level="long" />
+  </project>
+  <configuration Name="THUMB Debug" inherited_configurations="THUMB;Debug" />
+  <configuration
+    Name="THUMB"
+    Platform="ARM"
+    arm_instruction_set="Thumb"
+    arm_library_instruction_set="Thumb"
+    c_preprocessor_definitions="__THUMB"
+    hidden="Yes" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+  <configuration
+    Name="THUMB Release"
+    inherited_configurations="THUMB;Release" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG;STARTUP_FROM_RESET"
+    gcc_debugging_level="Level 3"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+  <configuration
+    Name="Common"
+    arm_linker_irq_stack_size="2048"
+    c_preprocessor_definitions="USE_FULL_LL_DRIVER;STM32F7xx"
+    c_user_include_directories=".;./FreeRTOS_Source/include;./FreeRTOS_Source/portable/GCC/ARM_CM7/r0p1/;./STM32F7xx_HAL_Driver/Inc;./FreeRTOS_TCP/include;./FreeRTOS_TCP/portable/NetworkInterface/STM32Fxx;./FreeRTOS_TCP/portable/Compiler/GCC;./FreeRTOS_TCP/portable/NetworkInterface/include;./libs/brssl"
+    pre_build_command=""
+    pre_build_command_control="Run When Build Required" />
+</solution>
